@@ -4,20 +4,18 @@ import { z } from "zod";
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "sonner";
-// import { auth } from "@/firebase/client";
+import { auth } from "@/firebase/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// import {
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-// } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-
-// import { signIn, signUp } from "@/lib/actions/auth.action";
+import { signIn, signUp } from "@/lib/actions/auth.action";
 import FormField from "./FormField";
 
 const authFormSchema = (type: FormType) => {
@@ -30,8 +28,8 @@ const authFormSchema = (type: FormType) => {
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
-
   const formSchema = authFormSchema(type);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -77,7 +75,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
         const idToken = await userCredential.user.getIdToken();
         if (!idToken) {
-          toast.error("Sign in Failed. Please try again.");
+          toast.error("Sign in failed. Please try again.");
           return;
         }
 
@@ -89,9 +87,9 @@ const AuthForm = ({ type }: { type: FormType }) => {
         toast.success("Signed in successfully.");
         router.push("/");
       }
-    } catch (error) {
-      console.log(error);
-      toast.error(`There was an error: ${error}`);
+    } catch (error: any) {
+      console.error(error);
+      toast.error(`There was an error: ${error.message}`);
     }
   };
 

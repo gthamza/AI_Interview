@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { dummyInterviews } from "@/constants";
+import InterviewCard from "@/components/InterviewCard";
+
 const page = () => {
   return (
     <>
@@ -30,7 +33,10 @@ const page = () => {
         <h2>Your Interviews</h2>
 
         <div className="interviews-section">
-          <p>You haven&apos;t taken any interviews yet</p>
+          {dummyInterviews.map((interview) => (
+            <InterviewCard {...interview} type={interview} />
+          ))}
+          {/* <p>You haven&apos;t taken any interviews yet</p> */}
         </div>
       </section>
 
@@ -38,7 +44,10 @@ const page = () => {
         <h2>Take Interviews</h2>
 
         <div className="interviews-section">
-          <p>There is no avaible </p>
+          {dummyInterviews.map((interview) => (
+            <InterviewCard {...interview} />
+          ))}
+          {/* <p>There is no avaible </p> */}
         </div>
       </section>
     </>
