@@ -9,6 +9,7 @@ enum CallStatus {
 }
 import { useState } from "react";
 const Agent = ({ userName }: AgentProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isSpeaking, setIsSpeaking] = useState(true);
   function handleDisconnect(): void {
     throw new Error("Function not implemented.");
@@ -16,7 +17,7 @@ const Agent = ({ userName }: AgentProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [messages, setMessages] = useState<SavedMessage[]>([]);
+  const [messages, setMessages] = useState<[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [lastMessage, setLastMessage] = useState<string>("");
 
